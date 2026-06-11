@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-green: #00ff41;
+  --color-neon-blue: #00f0ff;
+  --color-neon-red: #ff003c;
+  --color-dark-bg: #050505;
+  --color-panel-bg: rgba(10, 15, 10, 0.85);
+  
+  --font-mono: "Fira Code", "JetBrains Mono", "Courier New", monospace;
+  --font-sans: "Inter", "Roboto", system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: #c8d6e5;
+  font-family: var(--font-sans);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Ensure cursor is hidden if we use a custom one, but fallback is fine */
+  cursor: none; 
+}
+
+/* Fallback for elements to hide native cursor */
+a, button, input, textarea, select {
+  cursor: none;
+}
+
+::selection {
+  background-color: var(--color-neon-green);
+  color: #000;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg);
+  border-left: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 65, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-green);
+}
+
+/* Glassmorphism & Cyber Panels */
+.cyber-panel {
+  background: var(--color-panel-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 255, 65, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-neon-green), transparent);
+  opacity: 0.5;
+}
+
+/* Terminal UI */
+.terminal-window {
+  background: rgba(5, 5, 5, 0.95);
+  border: 1px solid #333;
+  border-top: 24px solid #1a1a1a;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.terminal-window::before {
+  content: 'root@sys:~';
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+
+.terminal-window::after {
+  content: '';
+  position: absolute;
+  top: -16px;
+  right: 12px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow: 14px 0 0 #ffbd2e, 28px 0 0 #27c93f;
+}
+
+.terminal-text {
+  font-family: var(--font-mono);
+}
+
+/* Typography Enhancements */
+.neon-text-green {
+  color: var(--color-neon-green);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+.neon-text-blue {
+  color: var(--color-neon-blue);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.neon-text-red {
+  color: var(--color-neon-red);
+  text-shadow: 0 0 8px rgba(255, 0, 60, 0.4);
+}
+
+.neon-border-green {
+  border-color: var(--color-neon-green);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+/* Animations */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scan-line {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 4px;
+  background: rgba(0, 255, 65, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+  opacity: 0.5;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.glitch-effect {
+  position: relative;
+}
+
+.glitch-effect::before,
+.glitch-effect::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-effect::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-effect::after {
+  left: -2px;
+  text-shadow: -1px 0 blue;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 86px, 0); }
+  20% { clip: rect(69px, 9999px, 21px, 0); }
+  40% { clip: rect(8px, 9999px, 66px, 0); }
+  60% { clip: rect(41px, 9999px, 3px, 0); }
+  80% { clip: rect(14px, 9999px, 73px, 0); }
+  100% { clip: rect(34px, 9999px, 29px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(3px, 9999px, 84px, 0); }
+  40% { clip: rect(28px, 9999px, 58px, 0); }
+  60% { clip: rect(81px, 9999px, 4px, 0); }
+  80% { clip: rect(11px, 9999px, 92px, 0); }
+  100% { clip: rect(54px, 9999px, 23px, 0); }
+}
