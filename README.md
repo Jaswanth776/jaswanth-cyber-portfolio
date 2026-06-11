@@ -40,5 +40,5 @@ To run this project locally:
 **Chaluvadi Jaswanth**
 - Cybersecurity Analyst (Blue Team Focus)
 - Location: India
-- [GitHub](https://github.com/jaswanth)
-- [LinkedIn](https://linkedin.com/in/jaswanth)
+- [GitHub](https://github.com/Jaswanth776)
+- [LinkedIn](https://www.linkedin.com/in/jaswanth-chaluvadi/)
